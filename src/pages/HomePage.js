@@ -11,7 +11,7 @@ const HomePage = () => {
           Now Playing
         </h2>
         {/* className="grid grid-cols-4 gap-10 movie-list" */}
-        <MovieList></MovieList>
+        <MovieList type="now_playing"></MovieList>
       </section>
 
       <section className="pb-20 movie-layout page-container">
