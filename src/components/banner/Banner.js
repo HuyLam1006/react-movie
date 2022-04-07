@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import useSWR from 'swr'
-import { fetcher } from '../../config'
-import Button from '../button/Button'
+import { fetcher } from 'apiConfig/config'
+import Button from 'components/button/Button'
 
 const Banner = () => {
   const { data } = useSWR(

@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import { fetcher, tmdbAPI } from 'apiConfig/config'
+import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import MovieCard from './MovieCard'
-
 import useSWR from 'swr'
-import { fetcher, tmdbAPI } from '../../config'
+import MovieCard from './MovieCard'
 
 // https://api.themoviedb.org/3/movie/now_playing?api_key=d2298ed8119a3da2a34b928d8b497bfa
 

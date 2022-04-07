@@ -1,9 +1,9 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { SwiperSlide, Swiper } from 'swiper/react'
+import { Swiper, SwiperSlide } from 'swiper/react'
 import useSWR from 'swr'
-import MovieCard from '../components/movie/MovieCard'
-import { apiKey, fetcher, tmdbAPI } from '../config'
+import MovieCard from 'components/movie/MovieCard'
+import { fetcher, tmdbAPI } from 'apiConfig/config'
 
 //https://api.themoviedb.org/3/movie/{movie_id}?api_key=<<api_key>>
 const MovieDetailsPage = () => {
@@ -27,14 +27,16 @@ const MovieDetailsPage = () => {
         <div
           className="w-full h-full bg-no-repeat bg-cover rounded-xl"
           style={{
-            backgroundImage: `url(https://image.tmdb.org/t/p/original/${backdrop_path})`, //data.backdrop_path
+            // backgroundImage: `url(https://image.tmdb.org/t/p/original/${backdrop_path})`, //data.backdrop_path
+            //! Toi uu
+            backgroundImage: `url(${tmdbAPI.imageOriginal(backdrop_path)})`,
           }}
         ></div>
       </div>
       <div className="w-full h-[400px] max-w-[800px] mx-auto -mt-[200px] relative z-10 pb-10">
         <img
           className="object-cover object-top w-full h-full rounded-xl"
-          src={`https://image.tmdb.org/t/p/original/${poster_path}`}
+          src={tmdbAPI.imageOriginal(poster_path)}
           alt=""
         />
       </div>
@@ -69,7 +71,7 @@ function MovieCredits() {
   const { movieId } = useParams()
 
   const { data, error } = useSWR(
-    `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}`,
+    tmdbAPI.getMovieMeta(movieId, 'credits'),
     fetcher
   )
   if (!data) return null
@@ -83,7 +85,7 @@ function MovieCredits() {
         {cast.slice(0, 4).map((item) => (
           <div className="cast-item" key={item.id}>
             <img
-              src={`https://image.tmdb.org/t/p/original/${item.profile_path}`}
+              src={tmdbAPI.imageOriginal(item.profile_path)}
               className="w-full h-[350px] object-cover rounded-lg mb-3"
               alt=""
             />
@@ -101,7 +103,7 @@ function MovieVideos() {
   const { movieId } = useParams()
 
   const { data, error } = useSWR(
-    `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}`,
+    tmdbAPI.getMovieMeta(movieId, 'videos'),
     fetcher
   )
   // console.log('MovieVideos ~ data', data)
@@ -141,7 +143,7 @@ function MovieSimilar() {
   const { movieId } = useParams()
 
   const { data, error } = useSWR(
-    `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${apiKey}`,
+    tmdbAPI.getMovieMeta(movieId, 'similar'),
     fetcher
   )
   // console.log('MovieSimilar ~ data', data)

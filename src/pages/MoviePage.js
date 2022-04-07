@@ -1,11 +1,9 @@
-import { type } from '@testing-library/user-event/dist/type'
 import React, { useEffect, useState } from 'react'
-import useSWR from 'swr'
-import MovieCard from '../components/movie/MovieCard'
-import MovieList from '../components/movie/MovieList'
-import { fetcher } from '../config'
-import { useDebounce } from '../hooks/useDebounce'
 import ReactPaginate from 'react-paginate'
+import useSWR from 'swr'
+import MovieCard from 'components/movie/MovieCard'
+import { fetcher, tmdbAPI } from 'apiConfig/config'
+import { useDebounce } from 'hooks/useDebounce'
 
 const MoviePage = () => {
   //! pagination
@@ -13,7 +11,6 @@ const MoviePage = () => {
   const itemsPerPage = 20
 
   // We start with an empty list of items.
-  const [currentItems, setCurrentItems] = useState(null)
   const [pageCount, setPageCount] = useState(0)
   // Here we use item offsets; we could also use page offsets
   // following the API or data you're working with.
@@ -21,9 +18,7 @@ const MoviePage = () => {
 
   const [nextPage, setNextPage] = useState(1)
   const [filter, setFilter] = useState('')
-  const [url, setUrl] = useState(
-    `https://api.themoviedb.org/3/movie/popular?api_key=d2298ed8119a3da2a34b928d8b497bfa&page=${nextPage}`
-  )
+  const [url, setUrl] = useState(tmdbAPI.getMovieList('popular', nextPage))
   const filterDebounce = useDebounce(filter, 500)
   const handleFilterChange = (e) => {
     setFilter(e.target.value)
@@ -34,13 +29,9 @@ const MoviePage = () => {
 
   useEffect(() => {
     if (filterDebounce) {
-      setUrl(
-        `https://api.themoviedb.org/3/search/movie?api_key=d2298ed8119a3da2a34b928d8b497bfa&query=${filterDebounce}&page=${nextPage}`
-      )
+      setUrl(tmdbAPI.getMovieSearch(filterDebounce, nextPage))
     } else {
-      setUrl(
-        `https://api.themoviedb.org/3/movie/popular?api_key=d2298ed8119a3da2a34b928d8b497bfa&page=${nextPage}`
-      )
+      setUrl(tmdbAPI.getMovieList('popular', nextPage))
     }
   }, [filterDebounce, nextPage])
 

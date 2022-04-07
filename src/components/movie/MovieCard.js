@@ -1,6 +1,7 @@
+import { tmdbAPI } from 'apiConfig/config'
+import Button from 'components/button/Button'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import Button from '../button/Button'
 
 const MovieCard = ({ item }) => {
   const { title, vote_average, poster_path, release_date, id } = item
@@ -11,7 +12,8 @@ const MovieCard = ({ item }) => {
   return (
     <div className="flex flex-col h-full p-3 text-white rounded-lg select-none movie-card bg-slate-800">
       <img
-        src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
+        // src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
+        src={tmdbAPI.imageOriginal(item.poster_path)}
         alt=""
         className="w-full h-[250px] object-cover rounded-lg mb-5"
       />
