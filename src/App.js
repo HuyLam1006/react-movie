@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import 'swiper/scss'
 import Banner from './components/banner/Banner'
-import Main from './components/Layout/Main'
+import Main from './components/layout/Main'
 import HomePage from './pages/HomePage'
 import MovieDetailsPage from './pages/MovieDetailsPage'
 import MoviePage from './pages/MoviePage'

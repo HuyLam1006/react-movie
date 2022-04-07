@@ -1,9 +1,10 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import Button from '../button/Button'
 
 const MovieCard = ({ item }) => {
   const { title, vote_average, poster_path, release_date, id } = item
-  console.log('MovieCard ~ item', item)
+  // console.log('MovieCard ~ item', item)
 
   const navigate = useNavigate()
 
@@ -20,12 +21,15 @@ const MovieCard = ({ item }) => {
           <span>{new Date(release_date).getFullYear()}</span>
           <span>{vote_average}</span>
         </div>
-        <button
+        <Button bgColor="primary" onClick={() => navigate(`/movie/${id}`)}>
+          Watch now
+        </Button>
+        {/* <button
           onClick={() => navigate(`/movie/${id}`)}
           className="w-full px-6 py-3 mt-auto capitalize rounded-lg bg-primary"
         >
           Watch now
-        </button>
+        </button> */}
       </div>
     </div>
   )

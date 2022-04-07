@@ -3,14 +3,16 @@ import { useParams } from 'react-router-dom'
 import { SwiperSlide, Swiper } from 'swiper/react'
 import useSWR from 'swr'
 import MovieCard from '../components/movie/MovieCard'
-import { apiKey, fetcher } from '../config'
+import { apiKey, fetcher, tmdbAPI } from '../config'
 
 //https://api.themoviedb.org/3/movie/{movie_id}?api_key=<<api_key>>
 const MovieDetailsPage = () => {
   const { movieId } = useParams()
 
   const { data, error } = useSWR(
-    `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`,
+    // `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`,
+    //! Toi' uu
+    tmdbAPI.getMovieDetaills(movieId),
     fetcher
   )
   // console.log('MovieDetailsPage ~ data', data)

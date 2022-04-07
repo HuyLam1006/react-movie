@@ -27,3 +27,18 @@
     border-radius: 8px;
   }
 }
+
+// pagination
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  .selected {
+    @apply text-primary;
+    padding: 10px;
+    background: #fff;
+    line-height: 10px;
+    border-radius: 4px;
+  }
+}
