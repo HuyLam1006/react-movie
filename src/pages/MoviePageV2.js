@@ -1,12 +1,12 @@
 import { fetcher, tmdbAPI } from 'apiConfig/config'
+import Button from 'components/button/Button'
 import MovieCard, { MovieCardSkeleton } from 'components/movie/MovieCard'
 import { useDebounce } from 'hooks/useDebounce'
 import React, { useEffect, useState } from 'react'
-import ReactPaginate from 'react-paginate'
-import useSWR from 'swr'
+import useSWRInfinite from 'swr/infinite'
 import { v4 } from 'uuid'
 
-const MoviePage = () => {
+const MoviePageV2 = () => {
   //! pagination
   // 20 bo phim
   const itemsPerPage = 20
@@ -25,8 +25,17 @@ const MoviePage = () => {
     setFilter(e.target.value)
   }
 
-  const { data, error } = useSWR(url, fetcher)
+  const { data, error, size, setSize } = useSWRInfinite(
+    (index) => url.replace('page=1', `page=${index + 1}`),
+    fetcher
+  )
+
+  const movies = data ? data.reduce((a, b) => a.concat(b.results), []) : []
   const loading = !data && !error
+
+  const isEmpty = data?.[0]?.results.length === 0
+  const isReachingEnd =
+    isEmpty || (data && data[data.length - 1]?.results.length < itemsPerPage)
 
   useEffect(() => {
     if (filterDebounce) {
@@ -37,7 +46,7 @@ const MoviePage = () => {
   }, [filterDebounce, nextPage])
 
   // if (!data) return null
-  const movies = data?.results || []
+
   // const { page, total_pages } = data
 
   //! pagination
@@ -102,50 +111,18 @@ const MoviePage = () => {
           ))}
       </div>
 
-      <div className="mt-10">
-        <ReactPaginate
-          breakLabel="..."
-          nextLabel={
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-6 h-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          }
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={5}
-          pageCount={pageCount}
-          previousLabel={
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-6 h-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          }
-          renderOnZeroPageCount={null}
-          className="pagination"
-        />
+      {/* //! load more  */}
+      <div className="mt-10 text-center">
+        <Button
+          onClick={() => (isReachingEnd ? {} : setSize(size + 1))}
+          disabled={isReachingEnd}
+          className={`${isReachingEnd ? 'bg-slate-300' : ''}`}
+        >
+          Load more
+        </Button>
       </div>
     </div>
   )
 }
 
-export default MoviePage
+export default MoviePageV2

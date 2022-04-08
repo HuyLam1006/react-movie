@@ -1,3 +1,4 @@
+import MoviePageV2 from 'pages/MoviePageV2'
 import { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import 'swiper/scss'
