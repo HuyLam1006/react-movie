@@ -7,24 +7,28 @@ const HomePage = () => {
     <>
       <Banner />
       <section className="pb-20 movie-layout page-container">
-        <h2 className="mb-10 text-3xl font-bold text-white capitalize">
-          Now Playing
-        </h2>
-        {/* className="grid grid-cols-4 gap-10 movie-list" */}
+        <span className="flex items-center mb-10 space-x-3">
+          <p className="text-3xl font-light">Now</p>
+          <p className="text-4xl font-bold text-primary">Playing</p>
+        </span>
         <MovieList type="now_playing"></MovieList>
       </section>
 
       <section className="pb-20 movie-layout page-container">
-        <h2 className="mb-10 text-3xl font-bold text-white capitalize">
-          Top rated
-        </h2>
+        {/* <h2 className="mb-10 text-white capitalize">       </h2>*/}
+        <span className="flex items-center mb-10 space-x-3">
+          <p className="text-3xl font-light">Top</p>
+          <p className="text-4xl font-bold text-primary">Rated</p>
+        </span>
+
         <MovieList type="top_rated"></MovieList>
       </section>
 
       <section className="pb-20 movie-layout page-container">
-        <h2 className="mb-10 text-3xl font-bold text-white capitalize">
-          Trending
-        </h2>
+        <span className="flex items-center mb-10 space-x-3">
+          <p className="text-3xl font-light"></p>
+          <p className="text-4xl font-bold text-primary">Trending</p>
+        </span>
         <MovieList type="popular"></MovieList>
       </section>
     </>

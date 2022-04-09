@@ -44,16 +44,19 @@ function BannerItem({ item }) {
         <h2 className="mb-5 text-3xl font-bold">{item.title}</h2>
         <div className="flex items-center mb-8 gap-x-3">
           <span className="px-4 py-2 border border-white rounded-md">
-            Adventure
+            Action
           </span>
           <span className="px-4 py-2 border border-white rounded-md">
             Adventure
           </span>
           <span className="px-4 py-2 border border-white rounded-md">
-            Adventure
+            Drama
           </span>
         </div>
-        <Button bgColor="primary" onClick={() => navigate(`/movie/${item.id}`)}>
+        <Button
+          bgColor="secondary"
+          onClick={() => navigate(`/movie/${item.id}`)}
+        >
           Watch Now
         </Button>
         {/* <button className="px-6 py-3 font-medium text-white rounded-lg bg-primary">

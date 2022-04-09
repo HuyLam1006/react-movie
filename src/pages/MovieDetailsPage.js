@@ -59,8 +59,9 @@ const MovieDetailsPage = () => {
       <p className="text-sm leading-relaxed text-center max-w-[600px] mx-auto mb-10">
         {overview}
       </p>
-      <MovieMeta type="credits"></MovieMeta>
+
       <MovieMeta type="videos"></MovieMeta>
+      <MovieMeta type="credits"></MovieMeta>
       <MovieMeta type="similar"></MovieMeta>
       {/* <MovieCredits></MovieCredits>
       <MovieVideos></MovieVideos>
@@ -103,11 +104,13 @@ function MovieMeta({ type = 'videos' }) {
       return (
         <div className="py-10">
           <div className="flex flex-col gap-10">
-            {results.slice(0, 2).map((item) => (
+            {results.slice(0, 1).map((item) => (
               <div key={item.id}>
-                <h3 className="inline-block p-3 mb-5 text-xl font-medium rounded-lg bg-secondary">
-                  {item.name}
-                </h3>
+                <div className="text-center">
+                  <h3 className="inline-block p-3 mb-5 text-xl font-medium text-center rounded-lg bg-secondary">
+                    {item.name}
+                  </h3>
+                </div>
                 <div key={item.id} className="w-full aspect-video">
                   <iframe
                     width="985"
@@ -128,7 +131,11 @@ function MovieMeta({ type = 'videos' }) {
     if (type === 'similar')
       return (
         <div className="py-10">
-          <h2 className="mb-10 text-2xl font-medium">Similar movies</h2>
+          {/* <h2 className="mb-10 text-2xl font-medium">Similar movies</h2> */}
+          <span className="flex items-center mb-10 space-x-2">
+            <p className="text-2xl font-light">Similar</p>
+            <p className="text-3xl font-bold text-primary">Movies</p>
+          </span>
           <div className="movie-list">
             <Swiper grabCursor={true} spaceBetween={40} slidesPerView={'auto'}>
               {results.length > 0 &&

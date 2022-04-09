@@ -1,4 +1,5 @@
 import MoviePageV2 from 'pages/MoviePageV2'
+import NotFoundPage from 'pages/NotFoundPage'
 import { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import 'swiper/scss'
@@ -24,8 +25,8 @@ function App() {
               path="/movie/:movieId"
               element={<MovieDetailsPage />}
             ></Route>
-            <Route path="*" element={<>Not Found</>}></Route>
           </Route>
+          <Route path="*" element={<NotFoundPage />}></Route>
         </Routes>
       </Suspense>
     </>

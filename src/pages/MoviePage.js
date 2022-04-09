@@ -55,7 +55,7 @@ const MoviePage = () => {
   }
 
   return (
-    <div className="py-10 page-container">
+    <div className="pb-10 page-container">
       <div className="flex mb-10">
         <div className="flex-1">
           <input
@@ -65,7 +65,7 @@ const MoviePage = () => {
             onChange={handleFilterChange}
           />
         </div>
-        <button className="p-4 text-white rounded-r-lg bg-primary">
+        <button className="p-4 text-white rounded-r-lg bg-secondary">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-6 h-6"

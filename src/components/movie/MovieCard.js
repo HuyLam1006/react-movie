@@ -26,7 +26,7 @@ const MovieCard = ({ item }) => {
           <span>{new Date(release_date).getFullYear()}</span>
           <span>{vote_average}</span>
         </div>
-        <Button bgColor="primary" onClick={() => navigate(`/movie/${id}`)}>
+        <Button bgColor="secondary" onClick={() => navigate(`/movie/${id}`)}>
           Watch now
         </Button>
         {/* <button
