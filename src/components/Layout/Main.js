@@ -2,7 +2,7 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Header from './Header'
 
-const Main = () => {
+const MainBo = () => {
   return (
     <>
       <Header></Header>
@@ -11,4 +11,4 @@ const Main = () => {
   )
 }
 
-export default Main
+export default MainBo

@@ -1,9 +1,8 @@
-import MoviePageV2 from 'pages/MoviePageV2'
 import NotFoundPage from 'pages/NotFoundPage'
 import { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import 'swiper/scss'
-import Main from './components/layout/Main'
+import MainBo from './components/layout/Main'
 // import HomePage from './pages/HomePage'
 // import MovieDetailsPage from './pages/MovieDetailsPage'
 // import MoviePage from './pages/MoviePage'
@@ -18,7 +17,7 @@ function App() {
     <>
       <Suspense fallback={<></>}>
         <Routes>
-          <Route element={<Main />}>
+          <Route element={<MainBo />}>
             <Route path="/" element={<HomePage />}></Route>
             <Route path="/movie" element={<MoviePage />}></Route>
             <Route
